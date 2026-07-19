@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Neville Dispatch</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#141210;--ink:#ece7db;--rule:#332e26;--rule-dark:#cfc8b6;
+    --red:#ff5a3c;--muted:#8d8672;--card:#1c1915;--tint:#221e18;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;}
+
+  /* ── MASTHEAD ── */
+  .masthead{max-width:1100px;margin:0 auto;padding:26px 20px 0;text-align:center;}
+  .mh-kicker{font-size:.62rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);}
+  .mh-title{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.02em;line-height:1;margin:8px 0 10px;}
+  .mh-title .dot{color:var(--red);}
+  .mh-meta{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-size:.68rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:10px 0 14px;border-top:1px solid var(--rule);border-bottom:3px double var(--rule-dark);margin-top:14px;}
+  .mh-meta b{color:var(--ink);}
+
+  /* ── NAV TABS ── */
+  .nav{max-width:1100px;margin:0 auto;display:flex;justify-content:center;gap:8px;padding:12px 20px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:10;}
+  .tab{font-family:'Inter',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:8px 22px;background:transparent;border:1px solid transparent;border-radius:999px;color:var(--muted);cursor:pointer;transition:all .15s;}
+  .tab:hover{color:var(--ink);}
+  .tab.active{background:var(--ink);color:var(--paper);}
+  .tab .cnt{font-size:.62rem;color:inherit;opacity:.55;margin-left:6px;}
+
+  /* ── LAYOUT ── */
+  .sheet{max-width:1100px;margin:0 auto;padding:26px 20px 80px;}
+  .page{display:none;}
+  .page.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .section-tag{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+  .section-tag h2{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;letter-spacing:.02em;white-space:nowrap;}
+  .section-tag .line{flex:1;height:1px;background:var(--rule-dark);}
+  .section-tag .stamp{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:700;white-space:nowrap;}
+
+  /* ── LEAD STORY ── */
+  .lead{display:grid;grid-template-columns:1.25fr 1fr;gap:0;border:1px solid var(--rule-dark);margin-bottom:34px;background:var(--card);}
+  .lead-main{padding:34px 36px;border-right:1px solid var(--rule);}
+  .lead-side{background:var(--tint);padding:28px 30px;display:flex;flex-direction:column;justify-content:center;}
+  .cat{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+  .lead-title{font-family:'Fraunces',serif;font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:900;line-height:1.08;letter-spacing:-.01em;margin-bottom:16px;}
+  .lead-sum{font-size:.95rem;line-height:1.7;color:#c9c2b1;max-width:52ch;}
+  .byline{margin-top:18px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .byline b{color:var(--ink);}
+  .lead-side .sq{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;font-style:italic;line-height:1.5;color:#d3ccba;}
+  .lead-side .sq::before{content:"“";font-size:2.6rem;font-weight:900;color:var(--red);display:block;line-height:.6;margin-bottom:10px;font-style:normal;}
+  .readmore{display:inline-block;margin-top:20px;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:3px;transition:color .15s;}
+  .readmore:hover{color:var(--red);}
+
+  /* ── STORY GRID ── */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule-dark);}
+  .story{padding:24px 22px 26px;border-bottom:1px solid var(--rule);position:relative;}
+  .story:not(:nth-child(3n)){border-right:1px solid var(--rule);}
+  .story .num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--rule);line-height:1;margin-bottom:12px;transition:color .2s;}
+  .story:hover .num{color:var(--red);}
+  .story h3{font-family:'Fraunces',serif;font-size:1.06rem;font-weight:600;line-height:1.3;margin-bottom:10px;}
+  .story h3 a{color:inherit;text-decoration:none;transition:color .15s;}
+  .story h3 a:hover{color:var(--red);}
+  .story p{font-size:.8rem;line-height:1.65;color:#a89f8c;}
+  .story .src{margin-top:12px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .story .src em{font-style:normal;color:var(--red);}
+
+  /* ── FOOTER ── */
+  .foot{max-width:1100px;margin:0 auto;padding:18px 20px 40px;border-top:3px double var(--rule-dark);text-align:center;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+
+  @media(max-width:860px){
+    .lead{grid-template-columns:1fr;}
+    .lead-main{border-right:none;border-bottom:1px solid var(--rule);}
+    .grid{grid-template-columns:1fr 1fr;}
+    .story:not(:nth-child(3n)){border-right:none;}
+    .story:nth-child(odd){border-right:1px solid var(--rule);}
+  }
+  @media(max-width:560px){
+    .grid{grid-template-columns:1fr;}
+    .story:nth-child(odd){border-right:none;}
+    .lead-main{padding:24px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mh-kicker">All the news, twice the tabs</div>
+  <h1 class="mh-title">The Neville Dispatch<span class="dot">.</span></h1>
+  <div class="mh-meta">
+    <span>Vol. I · No. 1</span>
+    <span><b>Saturday, July 18, 2026</b></span>
+    <span id="mh-count">— Stories</span>
+    <span>Curated Edition</span>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="tab active" data-tab="ai">Artificial Intelligence <span class="cnt" id="tc-ai"></span></button>
+  <button class="tab" data-tab="sports">Sports <span class="cnt" id="tc-sports"></span></button>
+</nav>
+
+<main class="sheet">
+  <div class="page active" id="page-ai"></div>
+  <div class="page" id="page-sports"></div>
+</main>
+
+<footer class="foot">The Neville Dispatch · Sourced from the open web · Links lead to original publishers</footer>
+
+<script>
+const NEWS = {
+  ai: {
+    label:"Artificial Intelligence",
+    stamp:"Section A",
+    stories:[
+    {
+      title:"OpenAI launches GPT-5.6 family — Luna, Terra, and Sol",
+      cat:"Model Launch", source:"LLM-Stats / BuildFastWithAI", date:"Jul 2026",
+      sum:"OpenAI's new flagship family ships in three sizes priced $1–$5 per million input tokens, all with a 1M-token context window and a Feb 2026 knowledge cutoff. Early reports claim it outperforms rivals on long-running agentic benchmarks.",
+      pull:"Three sizes, a million tokens of context, and a shot across the bow of every rival lab.",
+      url:"https://llm-stats.com/llm-updates"
+    },
+    {
+      title:"Anthropic becomes AI revenue leader at ~$47B annualized, eyes October IPO",
+      cat:"Business", source:"Fortune / BuildFastWithAI", date:"Jul 2026",
+      sum:"Driven by Claude Code and deep enterprise adoption, Anthropic is reportedly profitable in 2026 and preparing an S-1 for an IPO as early as October, backed by locked-in long-term compute deals. It's also in talks with Samsung on a custom Claude-tuned AI chip.",
+      url:"https://fortune.com/2026/07/02/sam-altman-new-world-order-ai-openai-google-anthropic/"
+    },
+    {
+      title:"OpenAI preparing confidential IPO filing — offers Washington a $42.6B stake",
+      cat:"Business", source:"BuildFastWithAI", date:"Jul 2026",
+      sum:"OpenAI is preparing to file confidentially for an IPO in the coming weeks, with a listing possible as soon as September 2026. As part of the strategy, it has offered the U.S. government a $42.6B stake.",
+      url:"https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026"
+    },
+    {
+      title:"Moonshot to fully open-source Kimi K3 — world's biggest open model at 2.8T parameters",
+      cat:"Open Source", source:"Crypto Integrated / AIToolsRecap", date:"Jul 18 2026",
+      sum:"Beijing-based Moonshot said Friday it will fully open-source Kimi K3 by late this month, letting anyone download and adapt the 2.8-trillion-parameter model. The web and mobile versions now offer three reasoning effort levels: Standard, High, and Max.",
+      url:"https://www.cryptointegrat.com/p/ai-news-july-18-2026"
+    },
+    {
+      title:"Oracle cuts up to 30,000 jobs to fund $500B Stargate AI buildout",
+      cat:"Industry", source:"Radical Data Science", date:"Jul 2026",
+      sum:"Oracle's massive workforce restructuring is the clearest example yet of how AI infrastructure investment is being funded across the industry — trading headcount for compute in the $500B Stargate partnership.",
+      url:"https://radicaldatascience.wordpress.com/2026/07/17/ai-news-briefs-bulletin-board-for-july-2026/"
+    },
+    {
+      title:"Microsoft unveils Project Perception, a multi-model AI security tool",
+      cat:"Security", source:"AIToolsRecap", date:"Jul 2026",
+      sum:"The new security offering blends Anthropic, OpenAI, and Microsoft's own models, positioned as a cheaper alternative with the global distribution muscle competitors can't currently match.",
+      url:"https://aitoolsrecap.com/Blog/AINewsJuly2026.aspx"
+    },
+    {
+      title:"Google caps Meta's Gemini access as compute becomes the industry bottleneck",
+      cat:"Industry", source:"Medium — AI News Weekly", date:"Jul 2026",
+      sum:"Google limited Meta's access to its Gemini models after Meta requested more compute than Google could supply — a sign that compute, not talent or data, is now the primary constraint even for the largest players. At Cloud Next '26, Google also rolled out an expanded Gemini Enterprise agent platform.",
+      url:"https://medium.com/@davidakpovi/ai-news-week-of-july-6-to-july-12-2026-f81a26c49c55"
+    },
+    {
+      title:"Hyundai workers strike over humanoid robot deployment",
+      cat:"Labor", source:"Crescendo AI News", date:"Jul 2026",
+      sum:"Hyundai's auto workers in South Korea have gone on partial strike in response to the deployment of humanoid robots on manufacturing lines — an early flashpoint in AI-driven labor disputes.",
+      url:"https://www.crescendo.ai/news/latest-ai-news-and-updates"
+    }
+  ]},
+  sports: {
+    label:"Sports",
+    stamp:"Section B",
+    stories:[
+    {
+      title:"MLB trade deadline set for Aug 3 — Tigers, Twins, Red Sox face tough calls",
+      cat:"MLB", source:"MLB.com / Yahoo Sports", date:"Jul 2026",
+      sum:"With the deadline less than three weeks out and a wide-open AL race, names like Tarik Skubal, Joe Ryan, Sonny Gray, Sandy Alcantara, and Kevin Gausman headline the trade candidate board. Contenders and bubble teams alike have tough decisions ahead.",
+      pull:"A wide-open American League means nearly every front office is on the clock.",
+      url:"https://www.mlb.com/news/when-is-the-mlb-trade-deadline-2026-date-time-candidates-storylines"
+    },
+    {
+      title:"Reds lock up Chase Burns with 7-year, $105M extension",
+      cat:"MLB", source:"WRBI Sports Digest", date:"Jul 18 2026",
+      sum:"Cincinnati secured its young ace with a long-term deal as the team opened the second half with a three-game series at Colorado, sending Brady Singer (3-9, 4.72 ERA) to the mound in the opener.",
+      url:"https://wrbiradio.com/sports-daily-digest-july-18-2026/"
+    },
+    {
+      title:"MLB second half underway — full rankings, projections, and playoff odds",
+      cat:"MLB", source:"ESPN", date:"Jul 2026",
+      sum:"Play resumed following the All-Star break with ESPN's second-half preview covering all 30 teams — power rankings, updated projections, and playoff odds for the stretch run.",
+      url:"https://www.espn.com/mlb/story/_/id/49352481/mlb-2026-second-half-preview-rankings-projections-playoff-odds-all-30-teams"
+    },
+    {
+      title:"NBA Summer League heats up — LJ Cryer drops five 3s as Warriors top Knicks",
+      cat:"NBA", source:"ESPN", date:"Jul 17 2026",
+      sum:"Summer League action continued in Las Vegas with rookies and second-year players making their cases, highlighted by Cryer's hot shooting night for Golden State.",
+      url:"https://www.espn.com/espn/latestnews"
+    },
+    {
+      title:"NFL training camps open — UFA tender signing period closes Jul 22",
+      cat:"NFL", source:"NFL Football Operations", date:"Jul 2026",
+      sum:"Camps are opening across the league. The signing period for unrestricted free agents holding a UFA tender ends at 4 p.m. ET on July 22 or the first day of camp, whichever is later.",
+      url:"https://operations.nfl.com/calendar-events/nfl-important-dates"
+    },
+    {
+      title:"Alabama lands 2028 top in-state QB prospect Kingston Preyear",
+      cat:"College", source:"WRBI Sports Digest", date:"Jul 2026",
+      sum:"The Crimson Tide won the recruiting battle for the top-rated in-state quarterback of the 2028 class, headlining another busy week of college football and basketball recruiting.",
+      url:"https://wrbiradio.com/sports-daily-digest-july-18-2026/"
+    },
+    {
+      title:"Which teams will unexpectedly sell at the deadline?",
+      cat:"MLB", source:"Yahoo Sports", date:"Jul 2026",
+      sum:"Beyond the obvious sellers, several bubble clubs could pivot if they slide in late July — reshaping the market for pitching-hungry contenders across both leagues.",
+      url:"https://sports.yahoo.com/articles/teams-unexpectedly-sell-trade-deadline-130000182.html"
+    }
+  ]}
+};
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function render(key){
+  const sec=NEWS[key];
+  const lead=sec.stories[0];
+  const rest=sec.stories.slice(1);
+  document.getElementById('page-'+key).innerHTML=`
+    <div class="section-tag">
+      <h2>${esc(sec.label)}</h2>
+      <div class="line"></div>
+      <span class="stamp">${esc(sec.stamp)} · ${sec.stories.length} stories</span>
+    </div>
+    <article class="lead">
+      <div class="lead-main">
+        <span class="cat">${esc(lead.cat)} — Top Story</span>
+        <h3 class="lead-title">${esc(lead.title)}</h3>
+        <p class="lead-sum">${esc(lead.sum)}</p>
+        <div class="byline">From <b>${esc(lead.source)}</b> · ${esc(lead.date)}</div>
+      </div>
+      <div class="lead-side">
+        <div class="sq">${esc(lead.pull||lead.sum.split('.')[0]+'.')}</div>
+        <a class="readmore" href="${esc(lead.url)}" target="_blank" rel="noopener">Read the full story</a>
+      </div>
+    </article>
+    <div class="grid">
+      ${rest.map((s,i)=>`
+        <article class="story">
+          <div class="num">${String(i+2).padStart(2,'0')}</div>
+          <span class="cat">${esc(s.cat)}</span>
+          <h3><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></h3>
+          <p>${esc(s.sum)}</p>
+          <div class="src"><em>${esc(s.source)}</em> · ${esc(s.date)}</div>
+        </article>`).join('')}
+    </div>`;
+}
+
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('page-'+t.dataset.tab).classList.add('active');
+    window.scrollTo({top:0});
+  });
+});
+
+render('ai');render('sports');
+const total=NEWS.ai.stories.length+NEWS.sports.stories.length;
+document.getElementById('mh-count').textContent=total+' Stories';
+document.getElementById('tc-ai').textContent=NEWS.ai.stories.length;
+document.getElementById('tc-sports').textContent=NEWS.sports.stories.length;
+</script>
+</body>
+</html>
