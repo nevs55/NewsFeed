@@ -66,6 +66,9 @@
   .story p{font-size:.8rem;line-height:1.65;color:#a89f8c;}
   .story .src{margin-top:12px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;}
   .story .src em{font-style:normal;color:var(--red);}
+  .listen{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
+  .listen a{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:2px;transition:color .15s;}
+  .listen a:hover{color:var(--red);}
 
   /* ── FOOTER ── */
   .foot{max-width:1100px;margin:0 auto;padding:18px 20px 40px;border-top:3px double var(--rule-dark);text-align:center;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
@@ -359,80 +362,80 @@ const NEWS = {
     stories:[
     {
       title:"Dwarkesh Podcast — the interview frontier labs can't skip",
-      cat:"Interviews", source:"Dwarkesh Patel", date:"Weekly-ish",
+      cat:"Interviews", source:"Dwarkesh Patel", date:"Weekly-ish", listen:"Dwarkesh Podcast",
       sum:"Deeply researched long-form interviews that have become the closest thing to peer review frontier labs voluntarily submit to — recent guests include Dario Amodei on whether exponential AI progress is ending and Elon Musk on putting compute in space. His episodes drew 12M+ combined views last year.",
       pull:"The closest thing to a peer reviewer that frontier AI labs voluntarily submit themselves to.",
       url:"https://www.dwarkesh.com"
     },
     {
       title:"Latent Space — the AI engineer's podcast",
-      cat:"Engineering", source:"swyx & Alessio Fanelli", date:"Weekly",
+      cat:"Engineering", source:"swyx & Alessio Fanelli", date:"Weekly", listen:"Latent Space podcast",
       sum:"The default show for people building with AI: agents, evals, inference, and dev tooling, straight from practitioners. Widely cited as the essential engineering pick alongside Dwarkesh for depth.",
       url:"https://www.latent.space"
     },
     {
       title:"Machine Learning Street Talk — research without the hype",
-      cat:"Research", source:"Tim Scarfe & guests", date:"Weekly",
+      cat:"Research", source:"Tim Scarfe & guests", date:"Weekly", listen:"Machine Learning Street Talk",
       sum:"Technical, philosophical, sometimes combative deep dives with researchers — notable episodes include Ben Goertzel on paths to AGI. The go-to when you want the argument, not the press release.",
       url:"https://www.youtube.com/@MachineLearningStreetTalk"
     },
     {
       title:"The AI Daily Brief — the news cycle in 20 minutes a day",
-      cat:"News", source:"Nathaniel Whittemore", date:"Daily",
+      cat:"News", source:"Nathaniel Whittemore", date:"Daily", listen:"The AI Daily Brief",
       sum:"A daily analysis show tracking AI news, model launches, and industry shifts — the fastest way to stay current without living on social feeds.",
       url:"https://www.tldl.io/resources/best-ai-podcasts-2026"
     },
     {
       title:"No Priors — founders and frontier capital",
-      cat:"VC", source:"Sarah Guo & Elad Gil", date:"Weekly",
+      cat:"VC", source:"Sarah Guo & Elad Gil", date:"Weekly", listen:"No Priors podcast",
       sum:"Conversations at the money-meets-models frontier. Recent 2026 episodes: Notion's Simon Last on custom AI agents, Jensen Huang on the state of AI, and Snowflake's Sridhar Ramaswamy.",
       url:"https://arize.com/ai-podcasts/"
     },
     {
       title:"Training Data — Sequoia's window into what gets funded",
-      cat:"VC", source:"Sequoia Capital", date:"Weekly",
+      cat:"VC", source:"Sequoia Capital", date:"Weekly", listen:"Training Data Sequoia Capital",
       sum:"Recent episodes span Harrison Chase (LangChain) on long-horizon agents and context engineering, the AlphaChip researchers, OpenAI's Sora 2 team on generative video, and Goodfire's Eric Ho on mechanistic interpretability.",
       url:"https://arize.com/ai-podcasts/"
     },
     {
       title:"The Cognitive Revolution — scouting AI from every angle",
-      cat:"Interviews", source:"Nathan Labenz", date:"Twice weekly",
+      cat:"Interviews", source:"Nathan Labenz", date:"Twice weekly", listen:"The Cognitive Revolution podcast",
       sum:"Long-form conversations with builders, researchers, and investors, plus occasional 'AI Scouting Reports' that synthesize complex topics into clear takeaways.",
       url:"https://www.cognitiverevolution.ai"
     },
     {
       title:"The TWIML AI Podcast — ML practice, interviews, and industry",
-      cat:"Research", source:"Sam Charrington", date:"Weekly",
+      cat:"Research", source:"Sam Charrington", date:"Weekly", listen:"TWIML AI Podcast",
       sum:"One of the longest-running ML shows, interviewing researchers and practitioners across the stack — a staple on every 2026 best-of list.",
       url:"https://twimlai.com"
     },
     {
       title:"Practical AI — accessible, implementation-first",
-      cat:"Applied", source:"Changelog Media", date:"Weekly",
+      cat:"Applied", source:"Changelog Media", date:"Weekly", listen:"Practical AI podcast",
       sum:"Technology professionals, business people, and students discussing productive, real-world AI implementations — deliberately accessible to everyone, not just researchers.",
       url:"https://practicalai.fm"
     },
     {
       title:"Interconnects — the researcher's newsletter, in audio",
-      cat:"Commentary", source:"Nathan Lambert", date:"Weekly",
+      cat:"Commentary", source:"Nathan Lambert", date:"Weekly", listen:"Interconnects Nathan Lambert",
       sum:"Sharp analysis of open models, RLHF, and lab strategy from an Allen Institute researcher — the wonkiest pick on the shortlist, and the one researchers cite to each other.",
       url:"https://www.interconnects.ai"
     },
     {
       title:"Lex Fridman Podcast — the biggest stage in AI conversation",
-      cat:"Interviews", source:"Lex Fridman", date:"Irregular",
+      cat:"Interviews", source:"Lex Fridman", date:"Irregular", listen:"Lex Fridman Podcast",
       sum:"Still the highest-reach AI-adjacent podcast on the planet, with marathon interviews of researchers, founders, and heads of state.",
       url:"https://lexfridman.com/podcast"
     },
     {
       title:"Hard Fork — where AI meets the broader news cycle",
-      cat:"Culture", source:"NYT — Kevin Roose & Casey Newton", date:"Weekly",
+      cat:"Culture", source:"NYT — Kevin Roose & Casey Newton", date:"Weekly", listen:"Hard Fork",
       sum:"The weekly conversation connecting AI developments to tech culture and policy — the recommended add-on if you want AI in context rather than in isolation.",
       url:"https://www.nytimes.com/column/hard-fork"
     },
     {
       title:"The Pragmatic Engineer — AI through the engineering-career lens",
-      cat:"Engineering", source:"Gergely Orosz", date:"Weekly",
+      cat:"Engineering", source:"Gergely Orosz", date:"Weekly", listen:"The Pragmatic Engineer podcast",
       sum:"How AI is reshaping software teams, hiring, and day-to-day engineering work — drawn from the largest tech newsletter on Substack.",
       url:"https://www.pragmaticengineer.com"
     },
@@ -446,6 +449,15 @@ const NEWS = {
 };
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function listenLinks(name){
+  const q=encodeURIComponent(name);
+  return `<div class="listen">
+    <a href="https://podcasts.apple.com/us/search?term=${q}" target="_blank" rel="noopener">Apple</a>
+    <a href="https://open.spotify.com/search/${q}" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.youtube.com/search?q=${q}" target="_blank" rel="noopener">YT Music</a>
+  </div>`;
+}
 
 function render(key){
   const sec=NEWS[key];
@@ -466,7 +478,7 @@ function render(key){
       </div>
       <div class="lead-side">
         <div class="sq">${esc(lead.pull||lead.sum.split('.')[0]+'.')}</div>
-        <a class="readmore" href="${esc(lead.url)}" target="_blank" rel="noopener">Read the full story</a>
+        ${lead.listen?listenLinks(lead.listen):`<a class="readmore" href="${esc(lead.url)}" target="_blank" rel="noopener">Read the full story</a>`}
       </div>
     </article>
     <div class="grid">
@@ -474,9 +486,10 @@ function render(key){
         <article class="story">
           <div class="num">${String(i+2).padStart(2,'0')}</div>
           <span class="cat">${esc(s.cat)}</span>
-          <h3><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></h3>
+          <h3><a href="${s.listen?'https://open.spotify.com/search/'+encodeURIComponent(s.listen):esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></h3>
           <p>${esc(s.sum)}</p>
           <div class="src"><em>${esc(s.source)}</em> · ${esc(s.date)}</div>
+          ${s.listen?listenLinks(s.listen):''}
         </article>`).join('')}
     </div>`;
 }
